@@ -1,5 +1,7 @@
 <?php
 
 require_once __DIR__ . '/vendor/autoload.php';
+use \Abwel\Phplace\Controllers\Pages\Home;
 
-echo \Abwel\Phplace\Controllers\Pages\Home::getHome();
+
+echo Home::getHome();
