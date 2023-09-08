@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Bem-vindo</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="estilos/style.css">
+</head>
+
+<body style="background-color: black;">
+    <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+    <header class="main-header">
+        <div class="logo">
+            <a href="index.html"><img src="componentes/imagens/phplacesecond.png" alt="Logo"></a>
+        </div>
+        <div class="menu-icon" onclick="toggleMenu()">
+            &#9776; <!-- Ícone do menu hamburguer -->
+        </div>
+        <ul id="menu">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="produtos.html">Produtos</a></li>
+            <li><a href="fundadores.html">Fundadores</a></li>
+            <li><a href="sobre-nos.html">Sobre nós</a></li>
+            <li><a href="area-do-cliente.html">Área do cliente</a></li>
+        </ul>
+    </header>
+
+    <script>
+        // Função para alternar a visibilidade do menu em dispositivos móveis
+        function toggleMenu() {
+            var menu = document.getElementById("menu");
+            menu.classList.toggle("active");
+        }
+    </script>
+
+
+    <section class="video-section">
+        <video autoplay muted loop id="video-bg">
+            <source src="componentes/videos/istockphoto-1026632086-640_adpp_is.mp4" type="video/mp4">
+        </video>
+        <div class="video-content">
+            <div class="text">
+                <h1>Nós vamos ser seu supermercado!</h1>
+            </div>
+            <div class="logo">
+                <img src="componentes/imagens/logo-simplified.png" alt="logo simples">
+            </div>
+        </div>
+    </section>
+
+
+    <section class="content-section">
+        <div class="content">
+            <div class="content-image">
+                <img src="componentes/imagens/bodybuilder.png" alt="bodybuilder">
+            </div>
+            <div class="content-text">
+                <h2>COMBATENDO</h2>
+                <p>OS PREÇOS ALTOS!</p>
+                <a href="area-do-cliente.html" class="button">Área do cliente</a>
+            </div>
+        </div>
+    </section>
+    
+
+
+    <footer>
+        <div class="footer">
+            <section class="footer-section">
+                <div class="column">
+                    <img src="componentes/imagens/phplacesecond.png" alt="phplace-logo" />
+                </div>
+                <div class="column">
+                    <nav class="main-menu">
+                        <ul>
+                            <li><a href="index.html">Inicio</a></li>
+                            <li><a href="produtos.html">Produtos</a></li>
+                            <li><a href="fundadores.html">Fundadores</a></li>
+                            <li><a href="sobre-nos.html">Sobre Nós</a></li>
+                            <li><a href="area-do-cliente.html">Área do Cliente</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="column">
+                    <iframe
+                        src="https://maps.google.com/maps?q=universidade%20de%20uberaba%20campus%20aeroporto&t=m&z=14&output=embed&iwloc=near"
+                        title="universidade de uberaba campus aeroporto"
+                        aria-label="universidade de uberaba campus aeroporto"></iframe>
+                </div>
+            </section>
+        </div>
+    </footer>
+
+</body>
+
+</html>

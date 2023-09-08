@@ -1,0 +1,16 @@
+{
+    "name": "abwel/phplace",
+    "description": "Mercadinho legal",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Abwel\\Phplace\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Arthur Brenno e Welcleys"
+        }
+    ],
+    "require": {}
+}
