@@ -20,6 +20,8 @@ class User {
      */
     private $password;
 
+    private $loginStatus = false;
+
     private function __construct($name, $email, $password) {
         $this->name     = $name;
         $this->email    = $email;
@@ -29,4 +31,25 @@ class User {
     public static function createUser($name, $email, $password) {
         return new self($name, $email, $password);
     }
+
+    public function setLoginStatus(bool $status) {
+        $this->loginStatus = $status;
+    }
+
+    public function getLoginStatus() {
+        return $this->loginStatus;
+    }
+
+    public function getName() {
+        return $this->name;
+    }
+
+    public function getPassword() {
+        return $this->password;
+    }
+
+    public function getEmail() {
+        return $this->email;
+    }
+
 }
