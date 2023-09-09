@@ -28,19 +28,26 @@ $route->get('/sobre-nos', [
     }
 ]);
 
+//ROTA DINAMICA
+$route->get('/pagina/{idPagina}/{acao}', [
+    function($idPagina, $acao) {
+        return new Response(200, 'Pagina ' . $idPagina . ' - ' . $acao);
+    }
+]);
+
 $route->get('/area-do-cliente', [
     function() {
         return new Response(200, Pages\AreaDoCliente::getAreaDoCliente());
     }
 ]);
 
-$route->get('/cadastro?error=invalid-name', [
+$route->get('/cadastro', [
     function() {
         return new Response(200, Pages\Cadastro::getCadastro());
     }
 ]);
 
-$route->get('/cadastro', [
+$route->post('/cadastro', [
     function() {
         return new Response(200, Pages\Cadastro::getCadastro());
     }
@@ -52,10 +59,5 @@ $route->get('/validar_cadastro', [
     }
 ]);
 
-$route->post('/cadastro', [
-    function() {
-        return new Response(200, Pages\Cadastro::getCadastro());
-    }
-]);
 
 
