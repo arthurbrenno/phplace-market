@@ -53,11 +53,10 @@ $route->post('/cadastro', [
     }
 ]);
 
-$route->get('/validar_cadastro', [
+$route->get('/login', [
     function() {
-        return new Response(200, Pages\CadastroValidator::getCadastroValidator());
+        return new Response(200, Pages\Login::getLogin());
     }
 ]);
-
 
 

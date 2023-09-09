@@ -6,7 +6,7 @@ use Brc\Inspector\Validators\EmailValidator;
 use Brc\Inspector\Validators\NameValidator;
 use Brc\Inspector\Validators\PasswordValidator;
 
-if (!isset($_POST['name']) && isset($_POST['email']) && isset($_POST['password'])) {
+if (!isset($_POST['name']) || !isset($_POST['email']) || !isset($_POST['password'])) {
     header('Location: /phplace-market/cadastro?error=missing-params');
     exit;
 }
@@ -31,4 +31,6 @@ if (!PasswordValidator::validate($password)) {
     header('Location: /phplace-market/cadastro?error=invalid-password');
     exit;
 }
+
+header('/phplace-market/login?status=success');
 
