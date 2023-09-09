@@ -27,11 +27,11 @@ class ViewRenderer {
         $keys           = array_keys($optParams);
         $originalValues = array_values($optParams);
 
-        $keys = array_map(function($item) {
+        $newKeys = array_map(function($item) {
             return '{{' . $item . '}}';
         }, $keys);
 
-        $newContent = str_replace($keys, $originalValues, $viewContents);
+        $newContent = str_replace($newKeys, $originalValues, $viewContents);
 
         return $newContent;
     }
