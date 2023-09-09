@@ -2,12 +2,17 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 use Abwel\Phplace\Controllers\Pages\Home;
+use Abwel\Phplace\Http\Response;
+const URL = 'http://localhost/phplace-market';
 
-echo "<pre>";
-$response = new \Abwel\Phplace\Http\Response(200, "ola mundoooo");
-$response->sendResponse();
-echo "</pre>";
+$rota = new \Abwel\Phplace\Http\Router(URL);
+
+$rota->get('/', [
+    function() {
+        return new Response(200, Home::getHome());
+    }
+]);
 
 
-exit;
-echo Home::getHome();
+$rota->run()
+     ->sendResponse();

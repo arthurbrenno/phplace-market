@@ -4,9 +4,9 @@ namespace Abwel\Phplace\Controllers\Pages;
 
 use Abwel\Phplace\Utils\ViewRenderer;
 
-class Fundadores extends Page {
+class Fundadores {
     public static function getFundadores() {
         $fundadoresContent = ViewRenderer::render('pages/fundadores');
-        return parent::getPageContent('Fundadores', $fundadoresContent);
+        return Page::getPageContent('Fundadores', $fundadoresContent);
     }
 }

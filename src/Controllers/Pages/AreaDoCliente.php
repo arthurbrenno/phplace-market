@@ -3,9 +3,9 @@
 namespace Abwel\Phplace\Controllers\Pages;
 use Abwel\Phplace\Utils\ViewRenderer;
 
-class AreaDoCliente extends Page {
+class AreaDoCliente {
     public static function getAreaDoCliente() {
         $mainContent = ViewRenderer::render('pages/area-do-cliente');
-        return parent::getPageContent('Area do Cliente', $mainContent);
+        return Page::getPageContent('Area do Cliente', $mainContent);
     }
 }

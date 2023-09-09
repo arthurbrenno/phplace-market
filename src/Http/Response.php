@@ -39,6 +39,27 @@ class Response {
         self::setContentType($contentType);
     }
 
+    /**
+     * @return void
+     */
+    public function sendResponse(): void {
+
+        $this->sendHeaders();
+
+        if ($this->contentType == 'text/html') {
+            echo $this->responseContent;
+            exit;
+        }
+    }
+
+    private function sendHeaders(): void {
+        http_response_code($this->httpStatus);
+        foreach ($this->headers as $key=>$value) {
+            header($key . ': ' . $value);
+        }
+
+    }
+
     private function setContentType($contentType) {
         $this->contentType = $contentType;
         self::addHeader('Content-Type', $contentType);
@@ -53,13 +74,4 @@ class Response {
         $this->headers[$key] = $value;
     }
 
-    /**
-     * @return void
-     */
-    public function sendResponse(): void {
-        if ($this->contentType == 'text/html') {
-            echo $this->responseContent;
-            exit;
-        }
-    }
 }

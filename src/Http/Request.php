@@ -28,7 +28,7 @@ class Request {
 
     /**
      * Header params
-     * @var array $headers
+     * @var array|false $headers
      */
     private $headers;
 

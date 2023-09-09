@@ -7,6 +7,6 @@ use Abwel\Phplace\Utils\ViewRenderer;
 class SobreNos extends Page {
     public static function getSobreNos() {
         $sobreNosContent = ViewRenderer::render('pages/sobre-nos');
-        return parent::getPageContent('Sobre Nos', $sobreNosContent);
+        return Page::getPageContent('Sobre Nos', $sobreNosContent);
     }
 }
