@@ -40,6 +40,12 @@ $route->get('/cadastro', [
     }
 ]);
 
+$route->get('/validar-cadastro', [
+    function() {
+        return new Response(200, Pages\Cadastro::getCadastro());
+    }
+]);
+
 $route->post('/cadastro', [
     function() {
         return new Response(200, Pages\Cadastro::getCadastro());
