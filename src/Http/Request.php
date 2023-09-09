@@ -4,6 +4,8 @@ namespace Abwel\Phplace\Http;
 
 class Request {
 
+    private $router;
+
     /**
      * @var string $httpMethod
      */
@@ -32,12 +34,23 @@ class Request {
      */
     private $headers;
 
-    public function __construct() {
-        $this->httpMethod  = $_SERVER['REQUEST_METHOD'];
-        $this->uri         = $_SERVER['REQUEST_URI'];
-        $this->queryParams = $_GET;
-        $this->postVars    = $_POST;
+    public function __construct($router) {
+        $this->router      = $router;
+        $this->httpMethod  = $_SERVER['REQUEST_METHOD'] ?? [];
+        $this->queryParams = $_GET ?? [];
+        $this->postVars    = $_POST ?? [];
         $this->headers     = getallheaders();
+        self::setUri();
+    }
+
+    private function setUri() {
+        $this->uri         = $_SERVER['REQUEST_URI'] ?? [];
+        $xURI = explode('?', $this->uri);
+        $this->uri = $xURI[0];
+    }
+
+    public function getRouter() {
+        return $this->router;
     }
 
     public function getHttpMethod() {
