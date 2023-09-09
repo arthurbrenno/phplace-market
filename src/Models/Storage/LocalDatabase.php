@@ -1,8 +1,6 @@
 <?php
 
 namespace Abwel\Phplace\Models\Storage;
-
-
 use Abwel\Phplace\Models\Entity\User;
 
 class LocalDatabase {

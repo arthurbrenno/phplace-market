@@ -16,7 +16,7 @@ $password = $_POST['password'];
 
 if (\Abwel\Phplace\Models\Storage\LocalDatabase::userExists($email, $password)) {
     //TODO redirecionar para pagina de usuarios
-    header('Location: /phplace-market/'); exit;
+    header('Location: /phplace-market/?status=login-success'); exit;
 }
 
 header('Location: /phplace-market/login?error=usuario-nao-cadastrado'); exit;
