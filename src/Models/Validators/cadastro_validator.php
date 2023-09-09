@@ -7,7 +7,7 @@ use Brc\Inspector\Validators\NameValidator;
 use Brc\Inspector\Validators\PasswordValidator;
 
 if (!isset($_POST['name']) || !isset($_POST['email']) || !isset($_POST['password'])) {
-    header('Location: /phplace-market/cadastro?error=missing-params');
+    header('Location: /phplace-market/cadastro?error=faltam-parametros');
     exit;
 }
 
@@ -18,19 +18,21 @@ $password = $_POST['password'];
 
 
 if (!NameValidator::validate($name)) {
-    header('Location: /phplace-market/cadastro?error=invalid-name');
+    header('Location: /phplace-market/cadastro?error=nome-invalido');
     exit;
 }
 
 if (!EmailValidator::validate($email)) {
-    header('Location: /phplace-market/cadastro?error=invalid-email');
+    header('Location: /phplace-market/cadastro?error=email-invalido');
     exit;
 }
 
 if (!PasswordValidator::validate($password)) {
-    header('Location: /phplace-market/cadastro?error=invalid-password');
+    header('Location: /phplace-market/cadastro?error=senha-invalida');
     exit;
 }
 
-header('/phplace-market/login?status=success');
+
+header('Location: /phplace-market/login?status=cadastrado.');
+exit;
 
