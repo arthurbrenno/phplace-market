@@ -64,7 +64,7 @@ class Router {
             $uriEqualsPattern = preg_match($patternRoute, $uri);
 
             if ($uriEqualsPattern) {
-                if ($methods[$httpMethod]) {
+                if (isset($methods[$httpMethod])) {
                     return $methods[$httpMethod];
                 }
                 throw new Exception("This method is not allowed", 405);

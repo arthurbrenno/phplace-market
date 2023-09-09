@@ -4,6 +4,11 @@ namespace Abwel\Phplace\Utils;
 
 class ViewRenderer {
 
+    private static $defaultVars = [];
+
+    public static function init($defaultVars = []) {
+        self::$defaultVars = $defaultVars;
+    }
 
     /**
      * Gets the raw contents of a view.
@@ -24,6 +29,7 @@ class ViewRenderer {
      */
     public static function render($viewName, $optParams = []) {
         $viewContents   = self::getRawContents($viewName);
+        $optParams      = array_merge(self::$defaultVars, $optParams);
         $keys           = array_keys($optParams);
         $originalValues = array_values($optParams);
 

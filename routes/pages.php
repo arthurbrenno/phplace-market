@@ -3,33 +3,45 @@
 use Abwel\Phplace\Http\Response;
 use Abwel\Phplace\Controllers\Pages;
 
-$rota->get('/', [
+$route->get('/', [
     function() {
         return new Response(200, Pages\Home::getHome());
     }
 ]);
 
 
-$rota->get('/produtos', [
+$route->get('/produtos', [
     function() {
         return new Response(200, Pages\Produtos::getProdutos());
     }
 ]);
 
-$rota->get('/fundadores', [
+$route->get('/fundadores', [
     function() {
         return new Response(200, Pages\Fundadores::getFundadores());
     }
 ]);
 
-$rota->get('/sobre-nos', [
+$route->get('/sobre-nos', [
     function() {
         return new Response(200, Pages\SobreNos::getSobreNos());
     }
 ]);
 
-$rota->get('/area-do-cliente', [
+$route->get('/area-do-cliente', [
     function() {
         return new Response(200, Pages\AreaDoCliente::getAreaDoCliente());
+    }
+]);
+
+$route->get('/cadastro', [
+    function() {
+        return new Response(200, Pages\Cadastro::getCadastro());
+    }
+]);
+
+$route->post('/cadastro', [
+    function() {
+        return new Response(200, Pages\Cadastro::getCadastro());
     }
 ]);

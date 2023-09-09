@@ -3,18 +3,19 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 use Abwel\Phplace\Http\Router;
-
-use Abwel\Phplace\Controllers\Pages\Produtos;
+use Abwel\Phplace\Utils\ViewRenderer;
 
 
 const URL = 'http://localhost/phplace-market';
 
-$rota = new Router(URL);
-require_once __DIR__ . '/routes/pages.php';
+ViewRenderer::init([
+    'URL' => URL
+]);
+
+$route = new Router(URL);
+include __DIR__ . '/routes/pages.php';
 
 
 
-
-
-$rota->run()
+$route->run()
      ->sendResponse();
