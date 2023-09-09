@@ -1,17 +1,19 @@
 <?php
 
 require_once __DIR__ . '/vendor/autoload.php';
-use Abwel\Phplace\Controllers\Pages\Home;
-use Abwel\Phplace\Http\Response;
+
+use Abwel\Phplace\Http\Router;
+
+use Abwel\Phplace\Controllers\Pages\Produtos;
+
+
 const URL = 'http://localhost/phplace-market';
 
-$rota = new \Abwel\Phplace\Http\Router(URL);
+$rota = new Router(URL);
+require_once __DIR__ . '/routes/pages.php';
 
-$rota->get('/', [
-    function() {
-        return new Response(200, Home::getHome());
-    }
-]);
+
+
 
 
 $rota->run()
