@@ -34,15 +34,21 @@ $route->get('/area-do-cliente', [
     }
 ]);
 
+$route->get('/cadastro?error=invalid-name', [
+    function() {
+        return new Response(200, Pages\Cadastro::getCadastro());
+    }
+]);
+
 $route->get('/cadastro', [
     function() {
         return new Response(200, Pages\Cadastro::getCadastro());
     }
 ]);
 
-$route->get('/validar-cadastro', [
+$route->get('/validar_cadastro', [
     function() {
-        return new Response(200, Pages\Cadastro::getCadastro());
+        return new Response(200, Pages\CadastroValidator::getCadastroValidator());
     }
 ]);
 
@@ -51,3 +57,5 @@ $route->post('/cadastro', [
         return new Response(200, Pages\Cadastro::getCadastro());
     }
 ]);
+
+
