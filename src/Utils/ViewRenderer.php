@@ -6,7 +6,7 @@ class ViewRenderer {
 
     private static $defaultVars = [];
 
-    public static function init($defaultVars = []) {
+    public static function setDefaultVars($defaultVars = []) {
         self::$defaultVars = $defaultVars;
     }
 

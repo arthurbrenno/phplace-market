@@ -1,8 +1,7 @@
 <?php
 
-namespace Brc\Inspector\Validators;
-
-use Brc\Inspector\Constants\RuleSet;
+namespace Abwel\Phplace\Models\Utils\sanitizer\src\Validators;
+use       Brc\Inspector\Constants\RuleSet;
 
 /**
  * Represents a password validator.

@@ -4,12 +4,16 @@ require_once __DIR__ . '/../../../src/Models/Utils/sanitizer/vendor/autoload.php
 require_once __DIR__ . '/../../../src/Models/Entity/User.php';
 require_once __DIR__ . '/../../../src/Models/Storage/LocalDatabase.php';
 require_once __DIR__ . '/../../../src/Models/Utils/sanitizer/src/Sanitizers/DatabaseSanitizer.php';
+require_once __DIR__ . '/../../../src/Models/Utils/sanitizer/src/Validators/EmailValidator.php';
+require_once __DIR__ . '/../../../src/Models/Utils/sanitizer/src/Validators/NameValidator.php';
+require_once __DIR__ . '/../../../src/Models/Utils/sanitizer/src/Validators/PasswordValidator.php';
 
-use Brc\Inspector\Validators\EmailValidator;
-use Brc\Inspector\Validators\NameValidator;
-use Brc\Inspector\Validators\PasswordValidator;
-use \Abwel\Phplace\Models\Utils\sanitizer\src\Sanitizers\DatabaseSanitizer;
+use Abwel\Phplace\Models\Utils\sanitizer\src\Validators\EmailValidator;
+use Abwel\Phplace\Models\Utils\sanitizer\src\Validators\NameValidator;
+use Abwel\Phplace\Models\Utils\sanitizer\src\Validators\PasswordValidator;
+use Abwel\Phplace\Models\Utils\sanitizer\src\Sanitizers\DatabaseSanitizer;
 use Abwel\Phplace\Models\Entity\User;
+use Abwel\Phplace\Models\Storage\LocalDatabase;
 
 if (!isset($_POST['name']) || !isset($_POST['email']) || !isset($_POST['password'])) {
     header('Location: /phplace-market/cadastro?error=faltam-parametros');
@@ -23,29 +27,29 @@ $password = $_POST['password'];
 
 
 if (!NameValidator::validate($name)) {
-    header('Location: /phplace-market/cadastro?error=nome-invalido');
+    header('Location: /phplace-market/cadastro?error=nome%20invalido');
     exit;
 }
 
 if (!EmailValidator::validate($email)) {
-    header('Location: /phplace-market/cadastro?error=email-invalido');
+    header('Location: /phplace-market/cadastro?error=email%20invalido');
     exit;
 }
 
 if (!PasswordValidator::validate($password)) {
-    header('Location: /phplace-market/cadastro?error=senha-invalida');
+    header('Location: /phplace-market/cadastro?error=senha%20invalida');
     exit;
 }
 
-if(\Abwel\Phplace\Models\Storage\LocalDatabase::userExists($email, $password)) {
-    header('Location: /phplace-market/cadastro?error=usuario-ja-cadastrado');
+if(LocalDatabase::userExists($email, $password)) {
+    header('Location: /phplace-market/cadastro?error=usuario%20ja%20cadastrado');
     exit;
 }
 
-$user = \Abwel\Phplace\Models\Entity\User::createUser($name, $email, $password);
+$user = User::createUser($name, $email, $password);
 $user->setLoginStatus(true);
 
-\Abwel\Phplace\Models\Storage\LocalDatabase::addUser($user);
+LocalDatabase::addUser($user);
 
 header('Location: /phplace-market/login?status=cadastrado.');
 exit;

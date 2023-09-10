@@ -1,8 +1,7 @@
 <?php
 
-namespace Brc\Inspector\Validators;
-
-use Brc\Inspector\Sanitizers\StringSanitizer;
+namespace Abwel\Phplace\Models\Utils\sanitizer\src\Validators;
+use       Brc\Inspector\Sanitizers\StringSanitizer;
 
 /**
  * Represents an email validator.
@@ -15,7 +14,7 @@ class EmailValidator implements \Brc\Inspector\Contracts\Validatable {
      * @param $input The input to be validated.
      * @return bool The sanitized input, or FALSE if it fails.
      */
-    public static function validate($input) {
+    public static function validate($input): bool {
         if (!StringSanitizer::sanitize($input)) {
             return false;
         }

@@ -4,72 +4,106 @@ namespace Abwel\Phplace\Http;
 
 class Request {
 
-    private $router;
+    /**
+     * @var Router Roteador da request.
+     */
+    private Router $router;
 
     /**
-     * @var string $httpMethod
+     * @var string metodo utilizado
      */
-    private $httpMethod;
+    private string $httpMethod;
 
     /**
      * @var string $uri
      */
-    private $uri;
+    private string $uri;
 
     /**
      * $_GET[]
-     * @var array $queryParams
+     * @var array $parametersGETMethod
      */
-    private $queryParams;
+    private array $parametersGETMethod;
 
     /**
      * $_POST[]
-     * @var array $postVars
+     * @var array $parametersPOSTMethod
      */
-    private $postVars;
+    private array $parametersPOSTMethod;
 
     /**
-     * Header params
-     * @var array|false $headers
+     * @var array|false Parametros do header
      */
-    private $headers;
+    private array|false $headers;
 
-    public function __construct($router) {
-        $this->router      = $router;
-        $this->httpMethod  = $_SERVER['REQUEST_METHOD'] ?? [];
-        $this->queryParams = $_GET ?? [];
-        $this->postVars    = $_POST ?? [];
-        $this->headers     = getallheaders();
-        self::setUri();
+    /**
+     * Construtor.
+     * @param Router $router
+     */
+    public function __construct(Router $router) {
+        $this->router               = $router;
+        $this->httpMethod           = $_SERVER['REQUEST_METHOD'] ?? [];
+        $this->parametersGETMethod  = $_GET ?? [];
+        $this->parametersPOSTMethod = $_POST ?? [];
+        $this->headers              = getallheaders();
+        $this->uri                  = self::removeUriParams($_SERVER['REQUEST_URI'] ?? []);
     }
 
-    private function setUri() {
-        $this->uri         = $_SERVER['REQUEST_URI'] ?? [];
-        $xURI = explode('?', $this->uri);
-        $this->uri = $xURI[0];
+    /**
+     * Seta a URI sem os parametros GET. Apenas o caminho.
+     * @param string $uri para ser "exploded".
+     * @return string nova uri sem os parametros
+     */
+    private function removeUriParams(string $uri): string {
+        $uriSplit  = explode('?', $uri);
+        return $uriSplit[0];
     }
 
-    public function getRouter() {
+    /**
+     * Getter.
+     * @return Router variavel de instancia $router
+     */
+    public function getRouter(): Router {
         return $this->router;
     }
 
-    public function getHttpMethod() {
+    /**
+     * Getter.
+     * @return string variavel de instancia $httpMethod
+     */
+    public function getHttpMethod(): string {
         return $this->httpMethod;
     }
 
-    public function getUri() {
+    /**
+     * Getter.
+     * @return string variavel de instancia $uri
+     */
+    public function getUri(): string {
         return $this->uri;
     }
 
-    public function getHeaders() {
+    /**
+     * Getter.
+     * @return string variavel de instancia $headers
+     */
+    public function getHeaders(): string {
         return $this->headers;
     }
 
-    public function getQueryParams() {
-        return $this->queryParams;
+    /**
+     * Getter.
+     * @return array variavel de instancia $getMethodParams
+     */
+    public function getParametersGETMethod(): array {
+        return $this->parametersGETMethod;
     }
 
-    public function getPostVars() {
-        return $this->postVars;
+    /**
+     * Getter.
+     * @return array variavel de instancia $postVars
+     */
+    public function getParametersPOSTMethod(): array {
+        return $this->parametersPOSTMethod;
     }
 }
