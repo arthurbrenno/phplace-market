@@ -1,5 +1,5 @@
 
-![home](https://media.discordapp.net/attachments/815753127537410102/1150491910490816733/image.png?width=1167&height=651)
+![home](https://media.discordapp.net/attachments/815753127537410102/1150507267301589042/image.png?width=1162&height=651)
 
 # Introdução
 Este é um projeto de um sistema web para um supermercado fictício chamado PHPlace. Originalmente, um trabalho simples da Universidade de Uberaba, que se tornou um grande aprendizado, uma vez que os conceitos utilizados agregam bastante no conhecimento.
