@@ -1,15 +1,15 @@
 <?php
 
 namespace Abwel\Phplace\Models\Utils\sanitizer\src\Validators;
-use       Brc\Inspector\Constants\RuleSet;
+use       Abwel\Phplace\Models\Utils\sanitizer\src\Constants\RuleSet;
 
 /**
  * Represents a password validator.
  * @package Brc\Inspector\Validators
- * @see \Brc\Inspector\Constants\RuleSet
- * @see \Brc\Inspector\Contracts\Validatable
+ * @see \Abwel\Phplace\Models\Utils\sanitizer\src\Constants\RuleSet
+ * @see \Abwel\Phplace\Models\Utils\sanitizer\src\Contracts\Validatable
  */
-class PasswordValidator implements \Brc\Inspector\Contracts\Validatable {
+class PasswordValidator implements \Abwel\Phplace\Models\Utils\sanitizer\src\Contracts\Validatable {
 
     /**
      * Validates a password.

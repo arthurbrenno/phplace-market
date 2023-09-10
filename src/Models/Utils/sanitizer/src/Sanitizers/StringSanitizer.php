@@ -1,21 +1,22 @@
 <?php
 
-namespace Brc\Inspector\Sanitizers;
-
-use Brc\Inspector\Constants\RuleSet;
+namespace    Abwel\Phplace\Models\Utils\sanitizer\src\Sanitizers;
+require_once __DIR__ . '/../Contracts/Sanitizeable.php';
+require_once __DIR__ . '/../Constants/RuleSet.php';
+use          Abwel\Phplace\Models\Utils\sanitizer\src\Contracts\Sanitizeable;
+use          Abwel\Phplace\Models\Utils\sanitizer\src\Constants\RuleSet;
 
 /**
- * Represents a string sanitizer.
- * @package Brc\Inspector\Sanitizers
+ * Representa um sanitizador de String.
  */
-class StringSanitizer implements \Brc\Inspector\Contracts\Sanitizeable {
+class StringSanitizer implements Sanitizeable {
 
     /**
-     * Sanitizes a string.
-     * @param $input
-     * @return bool|mixed The sanitized input, or FALSE if it fails.
+     * Sanitiza uma String.
+     * @param mixed $input string para ser sanitizada.
+     * @return string|false A string sanitizada, ou FALSE se falhar.
      */
-    public static function sanitize($input) {
+    public static function sanitize(mixed $input): mixed {
         if (!isset($input)) {
             return false;
         }
@@ -35,11 +36,11 @@ class StringSanitizer implements \Brc\Inspector\Contracts\Sanitizeable {
     }
 
     /**
-     * Converts a string to HTML entities.
-     * @param $string The string to be converted.
-     * @return string The string with HTML entities.
+     * Converte uma string para entidades HTML.
+     * @param string $string string para ser convertida.
+     * @return string string com as entidades HTML.
      */
-    public static function convertCharsToHTMLEntities($string) {
+    public static function convertCharsToHTMLEntities(string $string): string {
         return htmlspecialchars($string);
     }
 }

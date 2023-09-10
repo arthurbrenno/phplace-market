@@ -16,7 +16,7 @@ class Cadastro {
         $errorMessage = '';
 
         if (isset($_GET['error'])) {
-            $errorMessage = 'Não tente nos enganar ixpertinho. => ' . $_GET['error'];
+            $errorMessage = 'Não tente nos enganar ixpertinho => ' . $_GET['error'];
         }
 
         $content = ViewRenderer::render('pages/cadastro', [

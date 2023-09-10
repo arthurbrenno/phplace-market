@@ -1,15 +1,22 @@
 <?php
 
-namespace Brc\Inspector\Sanitizers;
-
-use Brc\Inspector\Constants\RuleSet;
+namespace    Abwel\Phplace\Models\Utils\sanitizer\src\Sanitizers;
+require_once __DIR__ . '/../Constants/RuleSet.php';
+require_once __DIR__ . '/../Contracts/Sanitizeable.php';
+use          Abwel\Phplace\Models\Utils\sanitizer\src\Contracts\Sanitizeable;
+use          Abwel\Phplace\Models\Utils\sanitizer\src\Constants\RuleSet;
 
 /**
- * Sanitizes a 32-bit integer.
- * @package Brc\Inspector\Sanitizers
+ * Representa um sanitizador de inteiro 32 bits.
  */
-class Int32Sanitizer implements \Brc\Inspector\Contracts\Sanitizeable {
-    public static function sanitize($input) {
+class Int32Sanitizer implements Sanitizeable {
+
+    /**
+     * Sanitiza uma entrada int 32 bits.
+     * @param mixed $input inteiro a ser sanitizado.
+     * @return mixed|false variavel sanitizada.
+     */
+    public static function sanitize(mixed $input): mixed {
         if (
             !is_int($input) ||
             $input < RuleSet::MIN_INTEGER_32_VALUE ||

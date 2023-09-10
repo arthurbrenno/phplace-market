@@ -1,11 +1,15 @@
 <?php
 
-namespace Brc\Inspector\Contracts;
+namespace Abwel\Phplace\Models\Utils\sanitizer\src\Contracts;
 
+/**
+ * Interface Funcional.
+ * Representa um objeto que pode ser sanitizado.
+ */
 interface Sanitizeable {
     /**
-     * @param $input
-     * @return bool
+     * @param mixed $input
+     * @return mixed
      */
-    public static function sanitize($input);
+    public static function sanitize(mixed $input): mixed;
 }

@@ -1,17 +1,19 @@
 <?php
 
 namespace Abwel\Phplace\Models\Utils\sanitizer\src\Validators;
-use       Brc\Inspector\Constants\RuleSet;
-use Brc\Inspector\Sanitizers\StringSanitizer;
+require_once __DIR__ . '/../Constants/RuleSet.php';
+require_once __DIR__ . '/../Contracts/Validatable.php';
+use       Abwel\Phplace\Models\Utils\sanitizer\src\Constants\RuleSet;
+use       Abwel\Phplace\Models\Utils\sanitizer\src\Sanitizers\StringSanitizer;
 
 /**
  * Represents a name validator.
  * @package Brc\Inspector\Validators
- * @see \Brc\Inspector\Sanitizers\StringSanitizer
- * @see \Brc\Inspector\Constants\RuleSet
- * @see \Brc\Inspector\Contracts\Validatable
+ * @see \Abwel\Phplace\Models\Utils\sanitizer\src\Sanitizers\StringSanitizer
+ * @see \Abwel\Phplace\Models\Utils\sanitizer\src\Constants\RuleSet
+ * @see \Abwel\Phplace\Models\Utils\sanitizer\src\Contracts\Validatable
  */
-class NameValidator implements \Brc\Inspector\Contracts\Validatable {
+class NameValidator implements \Abwel\Phplace\Models\Utils\sanitizer\src\Contracts\Validatable {
     public static function validate($input) {
 
         if (!preg_match("/^[a-zA-Z ]*$/", $input)

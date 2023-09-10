@@ -1,17 +1,19 @@
 <?php
 
-namespace Abwel\Phplace\Models\Utils\sanitizer\src\Validators;
-use       Brc\Inspector\Sanitizers\StringSanitizer;
+namespace    Abwel\Phplace\Models\Utils\sanitizer\src\Validators;
+require_once __DIR__ . '/../Contracts/Validatable.php';
+require_once __DIR__ . '/../Sanitizers/StringSanitizer.php';
+use          Abwel\Phplace\Models\Utils\sanitizer\src\Contracts\Validatable;
+use          Abwel\Phplace\Models\Utils\sanitizer\src\Sanitizers\StringSanitizer;
 
 /**
- * Represents an email validator.
- * @package Brc\Inspector\Validators
+ * Representa um validador de Email.
  */
-class EmailValidator implements \Brc\Inspector\Contracts\Validatable {
+class EmailValidator implements Validatable {
 
     /**
      * Validates an email.
-     * @param $input The input to be validated.
+     * @param string $input The input to be validated.
      * @return bool The sanitized input, or FALSE if it fails.
      */
     public static function validate($input): bool {

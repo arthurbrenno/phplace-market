@@ -2,32 +2,43 @@
 
 namespace Abwel\Phplace\Utils;
 
+/**
+ * Responsavel por renderizar uma view.
+ */
 class ViewRenderer {
 
-    private static $defaultVars = [];
+    /**
+     * @var array $defaultVars variaveis default da view. Exemplo: URL
+     */
+    private static array $defaultVars = [];
 
+    /**
+     * Setter. Seta as variaveis default da ViewRenderer.
+     * @param array $defaultVars variaveis padrao da View.
+     * @return void
+     */
     public static function setDefaultVars($defaultVars = []) {
         self::$defaultVars = $defaultVars;
     }
 
     /**
-     * Gets the raw contents of a view.
-     * @param $viewName: view to be serched.
-     * @return false|string contents of the view.
+     * Pega os conteudos "crus" da view.
+     * @param string $viewName view para ser procurada.
+     * @return false|string conteudos da view.
      */
-    private static function getRawContents($viewName) {
-        $viewPath = dirname(dirname(__DIR__)) . '/resources/view/' . $viewName . '.html';
+    private static function getRawContents(string $viewName): false|string {
+        $viewPath = dirname(__DIR__, 2) . '/resources/view/' . $viewName . '.html';
         $contents = file_get_contents($viewPath);
         return $contents ?: '';
     }
 
     /**
-     * Returns the rendered content of the view.
-     * @param $viewName: to be rendered.
-     * @param array $optParams;
-     * @return string rendered content of the view.
+     * Renderiza os conteudos da view com os parametros a serem substituidos na view.
+     * @param string $viewName view para ser renderizada.
+     * @param array $optParams parametros para substituir;
+     * @return string conteudo final renderizado da view.
      */
-    public static function render($viewName, $optParams = []) {
+    public static function render(string $viewName, array $optParams = []): string {
         $viewContents   = self::getRawContents($viewName);
         $optParams      = array_merge(self::$defaultVars, $optParams);
         $keys           = array_keys($optParams);
