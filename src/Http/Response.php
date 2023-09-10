@@ -2,48 +2,53 @@
 
 namespace Abwel\Phplace\Http;
 
+/**
+ * Representa uma resposta do servidor a uma Request.
+ */
 class Response {
 
     /**
-     * Http status code.
+     * Status da requisicao HTTP.
      * @var int $httpStatus
      */
-    private $httpStatus = 200;
+    private int $httpStatus;
 
     /**
-     * Response header.
+     * Header da response HTTP.
      * @var array $headers
      */
-    private $headers;
+    private array $headers;
 
     /**
-     * Type of content being returned
+     * Tipo de conteúdo sendo retornado. E.x: 'text/html'
      * @var string $contentType
      */
-    private $contentType;
+    private string $contentType;
 
     /**
-     * Contents of the response.
+     * Conteudo da Response.
      * @var mixed $responseContent
      */
-    private $responseContent;
+    private mixed $responseContent;
 
     /**
-     * @param $httpStatus
-     * @param $responseContent
-     * @param $contentType
+     * Construtor
+     * @param int $httpStatus status da Response HTTP
+     * @param mixed $responseContent conteudo da Response.
+     * @param string $contentType tipo de conteudo retornado pela response.
      */
-    public function __construct($httpStatus, $responseContent, $contentType = 'text/html') {
+    public function __construct(int $httpStatus, mixed $responseContent, string $contentType = 'text/html') {
         $this->httpStatus      = $httpStatus;
         $this->responseContent = $responseContent;
         self::setContentType($contentType);
     }
 
+
     /**
+     * Manda uma Response conforme o Content-Type setado
      * @return void
      */
     public function sendResponse(): void {
-
         $this->sendHeaders();
 
         if ($this->contentType == 'text/html') {
@@ -52,26 +57,35 @@ class Response {
         }
     }
 
+    /**
+     * Manda os headers da Response.
+     * @return void
+     */
     private function sendHeaders(): void {
         http_response_code($this->httpStatus);
+
         foreach ($this->headers as $key=>$value) {
             header($key . ': ' . $value);
         }
-
     }
 
-    private function setContentType($contentType) {
+    /**
+     * Setter. Seta a variavel local $contentType.
+     * @param string $contentType valor para ser setado.
+     * @return void
+     */
+    private function setContentType(string $contentType): void {
         $this->contentType = $contentType;
         self::addHeader('Content-Type', $contentType);
     }
 
     /**
-     * @param $key
-     * @param $value
+     * Adiciona um novo header [KV]
+     * @param string $key chave a ser adicionada
+     * @param string $value
      * @return void
      */
-    private function addHeader($key, $value): void {
+    private function addHeader(string $key, string $value): void {
         $this->headers[$key] = $value;
     }
-
 }

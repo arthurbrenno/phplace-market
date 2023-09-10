@@ -2,6 +2,9 @@
 
 namespace Abwel\Phplace\Http;
 
+/**
+ * Representa um request feito pelo Cliente.
+ */
 class Request {
 
     /**

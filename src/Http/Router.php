@@ -1,47 +1,70 @@
 <?php
 
 namespace Abwel\Phplace\Http;
-use Closure;
-use Exception;
-use ReflectionFunction;
+use       Closure;
+use       Exception;
+use       ReflectionFunction;
 
+/**
+ * Representa um roteador de URL.
+ */
 class Router {
 
     /**
      * @var string $url
      */
-    private $url;
+    private string $url;
 
     /**
      * @var string $prefix
      */
-    private $prefix;
+    private string $prefix;
 
     /**
      * @var array $routes
      */
-    private $routes;
+    private array $routes;
 
     /**
      * @var Request $request
      */
-    private $request;
+    private Request $request;
 
-    public function __construct($url) {
+    /**
+     * Construtor.
+     * @param string $url url para ser roteada
+     */
+    public function __construct(string $url) {
         $this->request = new Request($this);
         $this->url     = $url;
-        self::setPrefix($this->url);
+        $this->prefix  = self::getUrlPath($this->url);
     }
 
-    public function get($route, $params = []) {
+    /**
+     * Adiciona uma rota por GET.
+     * @param string $route endereco da rota.
+     * @param array $params parametros da rota.
+     * @return void
+     */
+    public function addGetRoute(string $route, array $params): void {
         self::addRoute('GET', $route, $params);
     }
 
-    public function post($route, $params = []) {
+    /**
+     * Adiciona uma rota por POST.
+     * @param string $route endereco da rota.
+     * @param array $params parametros da rota.
+     * @return void
+     */
+    public function addPostRoute(string $route, array $params = []): void {
         self::addRoute('POST', $route, $params);
     }
 
-    public function run() {
+    /**
+     * Tenta startar a rota.
+     * @return mixed
+     */
+    public function run(): mixed {
         try {
             $route = self::getRoute();
 
@@ -49,11 +72,11 @@ class Router {
                 throw new Exception("URL could not be processed", 500);
             }
 
-            $args = [];
+            $args       = [];
             $reflection = new ReflectionFunction($route['controller']);
 
             foreach ($reflection->getParameters() as $parameter) {
-                $name = $parameter->getName();
+                $name        = $parameter->getName();
                 $args[$name] = $route['variables'][$name] ?? '';
             }
 
@@ -63,8 +86,13 @@ class Router {
         }
     }
 
-    private function getRoute() {
-        $uri        = self::getUri();
+    /**
+     * Pega a rota de uma URI.
+     * @return mixed
+     * @throws Exception
+     */
+    private function getRoute(): mixed {
+        $uri        = self::getUriLastElement($this->request->getUri());
         $httpMethod = $this->request->getHttpMethod();
 
         foreach ($this->routes as $patternRoute=>$methods) {
@@ -72,8 +100,8 @@ class Router {
                 if (isset($methods[$httpMethod])) {
                     unset($matches[0]);
 
-                    $keys = $methods[$httpMethod]['variables'];
-                    $methods[$httpMethod]['variables'] = array_combine($keys, $matches);
+                    $keys                                         = $methods[$httpMethod]['variables'];
+                    $methods[$httpMethod]['variables']            = array_combine($keys, $matches);
                     $methods[$httpMethod]['variables']['request'] = $this->request;
 
                     return $methods[$httpMethod];
@@ -85,13 +113,24 @@ class Router {
         throw new Exception("URL not found", 404);
     }
 
-    private function getUri() {
-        $uri        = $this->request->getUri();
+    /**
+     * Pega o ultimo elemento da URI.
+     * @param string $uri
+     * @return string|false
+     */
+    private function getUriLastElement(string $uri): string|false {
         $explodeUri = strlen($this->prefix) ? explode($this->prefix, $uri) : [$uri];
         return end($explodeUri);
     }
 
-    private function addRoute($method, $route, $params = []) {
+    /**
+     * Adiciona uma nova rota
+     * @param string $method GET|POST
+     * @param string $route caminho da rota
+     * @param array $params
+     * @return void
+     */
+    private function addRoute(string $method, string $route, array $params = []): void {
         foreach($params as $key=>$value) {
             if ($value instanceof Closure) {
                 $params['controller'] = $value;
@@ -100,21 +139,25 @@ class Router {
         }
 
         $params['variables'] = [];
-        $patternVariable = '/{(.*?)}/';
+        $patternVariable     = '/{(.*?)}/';
+
         if (preg_match_all($patternVariable, $route, $matches)) {
-            $route = preg_replace($patternVariable, '(.*?)', $route);
+            $route               = preg_replace($patternVariable, '(.*?)', $route);
             $params['variables'] = $matches[1];
         }
-        $desiredRoute = '/^' . str_replace('/', '\/', $route) . '$/';
 
-
+        $desiredRoute                         = '/^' . str_replace('/', '\/', $route) . '$/';
         $this->routes[$desiredRoute][$method] = $params;
-
     }
 
-    private function setPrefix($url) {
-        $parsedUrl = parse_url($url);
-        $this->prefix = $parsedUrl['path'] ?: '';
+    /**
+     * Obtem o caminho da URL.
+     * @param string $url para ser obtida.
+     * @return string caminho da URL.
+     */
+    private function getUrlPath(string $url): string {
+        $parsedUrl    = parse_url($url);
+        return $parsedUrl['path'] ?: '';
     }
 
 }

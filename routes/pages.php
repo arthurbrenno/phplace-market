@@ -14,55 +14,55 @@ use Abwel\Phplace\Models\Static\Constants;
 function startMainRoute(): void {
     $route = new Router(Constants::URL);
 
-    $route->get('/', [
+    $route->addGetRoute('/', [
         function() {
             return new Response(200, Pages\Home::getHome());
         }
     ]);
 
-    $route->get('/produtos', [
+    $route->addGetRoute('/produtos', [
         function() {
             return new Response(200, Pages\Produtos::getProdutos());
         }
     ]);
 
-    $route->get('/fundadores', [
+    $route->addGetRoute('/fundadores', [
         function() {
             return new Response(200, Pages\Fundadores::getFundadores());
         }
     ]);
 
-    $route->get('/sobre-nos', [
+    $route->addGetRoute('/sobre-nos', [
         function() {
             return new Response(200, Pages\SobreNos::getSobreNos());
         }
     ]);
 
-    $route->get('/pagina/{idPagina}/{acao}', [
+    $route->addGetRoute('/pagina/{idPagina}/{acao}', [
         function($idPagina, $acao) {
             return new Response(200, 'Pagina ' . $idPagina . ' - ' . $acao);
         }
     ]);
 
-    $route->get('/area-do-cliente', [
+    $route->addGetRoute('/area-do-cliente', [
         function() {
             return new Response(200, Pages\AreaDoCliente::getAreaDoCliente());
         }
     ]);
 
-    $route->get('/cadastro', [
+    $route->addGetRoute('/cadastro', [
         function() {
             return new Response(200, Pages\Cadastro::getCadastro());
         }
     ]);
 
-    $route->post('/cadastro', [
+    $route->addPostRoute('/cadastro', [
         function() {
             return new Response(200, Pages\Cadastro::getCadastro());
         }
     ]);
 
-    $route->get('/login', [
+    $route->addGetRoute('/login', [
         function() {
             return new Response(200, Pages\Login::getLogin());
         }
