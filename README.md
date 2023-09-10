@@ -24,8 +24,9 @@ echo 'Clone o projeto e divirta-se!';
 ```
 
 ## Como clonar:
+```bash
 git clone https://github.com/arthurbrenno/phplace-market.git
-
+```
 
 
 
