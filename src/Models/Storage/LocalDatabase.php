@@ -15,7 +15,7 @@ class LocalDatabase {
      * @return void
      */
     public static function addUser($user) {
-        $file = file_get_contents(__DIR__ . '/users.json');
+        $file    = file_get_contents(__DIR__ . '/users.json');
         $users   = json_decode($file, true);
         $users[] = [
             'name'     => $user->getName(),
@@ -30,6 +30,11 @@ class LocalDatabase {
      * @return void
      */
     public static function removeUser($user) {
+        $contents = file_get_contents(__DIR__ . '/users.json');
+        $users    = json_encode($contents);
+        echo '<pre>';
+        print_r($users);
+        echo '</pre>';
     }
 
     public static function getUsers() {
