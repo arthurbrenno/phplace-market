@@ -32,6 +32,7 @@ git clone https://github.com/arthurbrenno/phplace-market.git
 
 ## Como as Requests/Responses estão sendo feitas (extremamente resumido):
 ```php
+// Depois de configurar uma rota, lançamos uma Response
 $route->addGetRoute('/produtos', [
     function() {
         return new Response(200, Pages\Produtos::getProdutos());
